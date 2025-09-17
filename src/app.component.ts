@@ -77,6 +77,8 @@ export class AppComponent {
     return hotel.pricePerNight * this.bookingNights();
   });
 
+  isRangeSelected = computed(() => !!this.checkInDate() && !!this.checkOutDate());
+
   calendarDays = computed(() => {
     const currentDate = this.calendarDate();
     const year = currentDate.getFullYear();

@@ -181,13 +181,16 @@
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                   </div>
-                  <div class="grid grid-cols-7 gap-1 text-center text-xs text-slate-500 mb-2">
+                  <div class="grid grid-cols-7 text-center text-xs text-slate-500 mb-2">
                     <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
                   </div>
-                  <div class="grid grid-cols-7 gap-1">
+                  <div class="grid grid-cols-7">
                     @for (day of calendarDays(); track day.date) {
                        <button (click)="selectDate(day)" [disabled]="day.isPast"
-                        class="relative w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-150"
+                        class="relative w-10 h-10 flex items-center justify-center transition-colors duration-150"
+                        [class.rounded-l-full]="isRangeSelected() && isCheckIn(day.date)"
+                        [class.rounded-r-full]="isRangeSelected() && isCheckOut(day.date)"
+                        [class.rounded-full]="!isRangeSelected() || (!isInRange(day.date) && !isCheckIn(day.date) && !isCheckOut(day.date))"
                         [class.text-slate-400]="!day.isCurrentMonth || day.isPast"
                         [class.cursor-not-allowed]="day.isPast"
                         [class.hover:bg-blue-100]="!day.isPast"
@@ -233,7 +236,7 @@
                 </div>
 
                 <button (click)="startPaymentProcess()" [disabled]="!checkInDate() || !checkOutDate()" class="mt-8 w-full flex justify-center items-center bg-[#00457C] text-white py-3 rounded-lg font-bold text-lg transition-colors duration-200 disabled:bg-slate-400 disabled:cursor-not-allowed" [class.hover:bg-[#003057]]="checkInDate() && checkOutDate()">
-                  <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M7.183 3.004h9.805c.338.005.668.14.912.373.244.233.38.555.385.888l-1.33 9.273c-.027.24-.135.46-.307.625-.172.164-.4.267-.64.267H5.33c-.338-.005-.668-.14-.912-.373s-.38-.555-.385-.888L5.36 4.265c.027-.24.135-.46.307-.625.172-.164.4-.267.64-.267h.876Zm10.19 1.263H6.804l-.88 6.135c-.01.071.01.144.053.2.043.056.108.09.176.09h11.95c.13 0 .24-.11.235-.24l-1.155-8.055v-.13Zm-11.45 9.07h12.31c.338.005.668.14.912.373.244.233.38.555.385.888l-.88 6.135c-.027.24-.135.46-.307.625-.172.164-.4.267-.64.267H4.33c-.338-.005-.668-.14-.912-.373s-.38-.555-.385-.888l.88-6.135c.027-.24.135-.46.307-.625.172-.164.4-.267.64-.267h.93Z"/></svg>
+                  <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M7.183 3.004h9.805c.338.005.668.14.912.373.244.233.38.555.385.888l-1.33 9.273c-.027.24-.135.46-.307.625-.172.164-.4.267-.64.267H5.33c-.338-.005-.668-.14-.912-.373s-.38-.555-.385-.888L5.36 4.265c.027-.24.135-.46.307.625.172-.164.4-.267.64-.267h.876Zm10.19 1.263H6.804l-.88 6.135c-.01.071.01.144.053.2.043.056.108.09.176.09h11.95c.13 0 .24-.11.235-.24l-1.155-8.055v-.13Zm-11.45 9.07h12.31c.338.005.668.14.912.373.244.233.38.555.385.888l-.88 6.135c-.027.24-.135.46-.307.625-.172.164-.4.267-.64.267H4.33c-.338-.005-.668-.14-.912-.373s-.38-.555-.385-.888l.88-6.135c.027-.24.135-.46.307.625.172-.164.4-.267.64-.267h.93Z"/></svg>
               Pay with PayPal
             </button>
               </div>

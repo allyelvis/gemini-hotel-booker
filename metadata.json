@@ -1,0 +1,5 @@
+{
+  "name": "Gemini Hotel Booker",
+  "description": "A modern hotel booking application that uses the Gemini API to provide rich hotel descriptions and local recommendations. Includes a simulated PayPal payment flow.",
+  "requestFramePermissions": []
+}
